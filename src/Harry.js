@@ -2,10 +2,10 @@ import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react';
 
 export const Hogwarts = () =>{
-   const [School,setSchool]=useState();//пропс всех учеников
-   const [Current,setCurrent]=useState();//пропс текущих учеников
-   const [Student,setStudent]=useState('');//пропс фильтра имени
-   const [SelectedHouse,setSelectedHouse]=useState('');//пропс фильтра факультета
+   const [School,setSchool]=useState();//state всех учеников
+   const [Current,setCurrent]=useState();//state текущих учеников
+   const [Student,setStudent]=useState('');//state фильтра имени
+   const [SelectedHouse,setSelectedHouse]=useState('');//state фильтра факультета
    
     useEffect(async ()=>{
         const URL='http://hp-api.herokuapp.com/api/characters/students'//ссылка на студентов
@@ -19,23 +19,23 @@ export const Hogwarts = () =>{
     
     const onChange=useCallback((event)=>{ //фильтр по имени
             setStudent(event.target.value)
-            //console.log(event.target.value)
+            //console.log(event.target.value) //логирование в консоль полученных значений
 
             const tempData=School?.filter(x=>x.name.includes(event.target.value))
-            //console.log(tempData)
+            //console.log(tempData) //логирование в консоль полученных после фильтрации объектов
             
             setCurrent(tempData);
-    })
+    },[School])
 
     const onSelect=useCallback((event)=>{ //фильтр по факультету
             setSelectedHouse(event.target.value); //сохранение текущего состояния выбора
-            //console.log(event.target.value);
+            //console.log(event.target.value); //логирование в консоль полученных значений 
            
             const tempData=School?.filter(x=>x.house.includes(event.target.value)); //фильтр на факультет
-            //console.log(tempData)
+            //console.log(tempData) //логирование в консоль полученнх после фильтрации объектов
            
             setCurrent(tempData);//сохранение изменённого списка
-    })
+    },[School])
     return(
         <>      
             <div className={'container'}>  

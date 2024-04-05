@@ -8,7 +8,7 @@ export const Hogwarts = () =>{
    const [SelectedHouse,setSelectedHouse]=useState('');//state фильтра факультета
    
     useEffect(async ()=>{
-        const URL='http://hp-api.herokuapp.com/api/characters/students'//ссылка на студентов
+        const URL='https://hp-api.onrender.com/api/characters/students'//ссылка на студентов
         const res=await axios(URL)//сохранение данных с ссылки
         setSchool(res.data)//установка в пропс данных
     },[setSchool]);
